@@ -1,0 +1,118 @@
+<!-- ================= HEADER ================= -->
+<header>
+  <!-- Link stylesheet for header design -->
+  <link rel="stylesheet" href="styles.css" />
+  <!-- ===== Top Navigation Bar ===== -->
+  <nav aria-label="Main Navigation" class="header-bar">
+    <div class="menu-box">
+      <button aria-label="Home Menu">&#9776;</button> <!-- Hamburger icon -->
+    </div>
+    <h1>This Week</h1>
+    <div class="profile-box">
+      <!-- Circle placeholder for profile icon -->
+      <button aria-label="User Profile">👤</button>
+    </div>
+  </nav>
+
+  <!-- ===== Weekly Overview ===== -->
+  <section aria-label="Weekly Summary" class="summary-box">
+    <div class="summary-item">
+      <p><strong>3</strong> Finished</p>
+    </div>
+    <div class="summary-item">
+      <p><strong>5</strong> Unfinished</p>
+    </div>
+    <div class="summary-item">
+      <p><strong>023</strong> EXP Earned</p>
+    </div>
+  </section>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+
+  <!-- ===== MIDDLE WRAPPER (Main Dashboard) ===== -->
+  <section aria-label="Main Dashboard">
+
+    <!-- ===== TASK SECTION ===== -->
+    <section aria-label="Task Management">
+      <h2>Your Chore Tasks</h2>
+
+      <!-- --- Two Columns: Unassigned + Selected Tasks --- -->
+      <div class="task-columns">
+        
+        <!-- Left Column: Unassigned Tasks -->
+        <article aria-label="Unassigned Tasks">
+          <h3>Unassigned Tasks</h3>
+          <ul>
+            <li>Task 1 — Category A — EXP 10</li>
+            <li>Task 2 — Category B — EXP 20</li>
+            <li>Task 3 — Category C — EXP 15</li>
+          </ul>
+        </article>
+
+        <!-- Right Column: Your Selected Task -->
+        <article aria-label="Your Selected Task">
+          <h3>Your Selected Task</h3>
+          <ul>
+            <li>Task 4 — Category A — EXP 10</li>
+            <li>Task 5 — Category C — EXP 25</li>
+          </ul>
+        </article>
+
+      </div> <!-- end task-columns -->
+    </section>
+
+    <!-- ===== HORIZONTAL DIVIDER ===== -->
+    <hr />
+
+    <!-- ===== TEAMMATE SECTION ===== -->
+    <section aria-label="Your Space Teammates">
+      <h2>Your Space Teammates</h2>
+
+      <!-- --- Teammate #1 --- -->
+      <article aria-label="Teammate #1">
+        <h3>Teammate #1</h3>
+        <ul>
+          <li>Task 6 — Category B — EXP 10</li>
+          <li>Task 7 — Category A — EXP 20</li>
+        </ul>
+        <button>Chat</button>
+      </article>
+
+      <!-- --- Teammate #2 --- -->
+      <article aria-label="Teammate #2">
+        <h3>Teammate #2</h3>
+        <ul>
+          <li>Task 8 — Category C — EXP 15</li>
+          <li>Task 9 — Category B — EXP 25</li>
+        </ul>
+        <button>Chat</button>
+      </article>
+
+      <!-- --- Teammate #3 --- -->
+      <article aria-label="Teammate #3">
+        <h3>Teammate #3</h3>
+        <ul>
+          <li>Task 10 — Category A — EXP 10</li>
+          <li>Task 11 — Category D — EXP 30</li>
+        </ul>
+        <button>Chat</button>
+      </article>
+
+      <!-- --- Leaderboard Link --- -->
+      <p><a href="#">Go to Leaderboard &gt;&gt;</a></p>
+    </section>
+
+  </section> <!-- end Main Dashboard wrapper -->
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <!-- ===== Bottom Navigation Bar ===== -->
+  <nav aria-label="Footer Navigation">
+    <a href="#" aria-label="Home Button">🏠 Home</a>
+    <a href="#" aria-label="Leaderboard">Go to Leaderboard &gt;&gt;</a>
+  </nav>
+</footer>
