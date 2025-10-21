@@ -1,0 +1,108 @@
+/* Boundary box component converted to a sharper 8-bit / pixel-art style
+	 Usage: add the `boundary-box` class to any section or container that
+	 should appear inside the decorative pixel frame. */
+
+/* Load a retro pixel font (Press Start 2P) for an 8-bit look. If offline,
+	 the fallback is 'monospace' which keeps the pixel feel. */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root{
+	--box-bg-top: #f7df83; /* lighter gold */
+	--box-bg-bottom: #e0b04a; /* darker gold */
+	--box-border: #5d3a12; /* outer border */
+	--box-accent: #f4e0a3; /* inner highlight */
+	--box-text: #2f1a0a;
+}
+
+/* Pixel-perfect frame emulation using layered box-shadows and stepped edges.
+	 The border is drawn with multiple box-shadows to imitate chunky pixels. */
+.boundary-box{
+	background: linear-gradient(180deg,var(--box-bg-top),var(--box-bg-bottom));
+	padding: 12px 18px;
+	margin: 12px 0;
+	color: var(--box-text);
+	font-family: 'Press Start 2P', monospace;
+	/* smaller, responsive pixel font sizing */
+	/* clamp(min, preferred, max) keeps the pixel font legible across viewports */
+	font-size: clamp(0.65rem, 1.6vw, 0.9rem);
+	position: relative;
+	/* Remove smooth rounded corners for sharp pixel feel */
+	border-radius: 0;
+	/* Create a chunky pixel border using multiple spread shadows (outer frame)
+		 Each shadow step simulates one pixel row/column. */
+	box-shadow:
+		/* outer dark stroke */
+		0 0 0 6px var(--box-border),
+		/* inner thin highlight */
+		0 0 0 8px var(--box-accent) inset,
+		/* chunky base shadow to give depth */
+		6px 6px 0 0 #8b5a1a;
+	/* Use crisp rendering to avoid anti-aliasing on text/background */
+	image-rendering: pixelated;
+}
+
+/* Add a stepped inner border using repeating-linear-gradient to emulate
+	 the pixel corner lines. This avoids relying on images. */
+.boundary-box::before{
+	content: '';
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	right: -6px;
+	bottom: -6px;
+	background-image:
+		linear-gradient(90deg, rgba(0,0,0,0.12) 0 8px, transparent 8px),
+		linear-gradient(180deg, rgba(255,255,255,0.04) 0 6px, transparent 6px);
+	background-repeat: repeat;
+	pointer-events: none;
+}
+
+/* Inner frame square (like the lighter inset in the reference) */
+.boundary-box::after{
+	content: '';
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	top: 8px;
+	bottom: 8px;
+	border: 2px solid rgba(0,0,0,0.12);
+	pointer-events: none;
+}
+
+.boundary-box h1,
+.boundary-box h2,
+.boundary-box h3,
+.boundary-box p,
+.boundary-box li{
+	color: var(--box-text);
+	/* Use no text-shadow or a single-pixel highlight to keep the retro look */
+	text-shadow: 1px 1px 0 rgba(255,255,255,0.12);
+	line-height: 1.2;
+}
+
+/* Small utility: tighter summary layout inside the box */
+.summary-box.boundary-box{
+	display:flex;
+	gap: 12px;
+	align-items:center;
+	justify-content:space-between;
+	/* make children wrap on narrow viewports and distribute space evenly */
+	flex-wrap: wrap;
+}
+
+.summary-box.boundary-box .summary-item{
+	flex: 1 1 120px; /* grow, shrink, and a sensible min width */
+	min-width: 100px;
+	text-align: center;
+}
+
+.main-dashboard.boundary-box{
+	padding: 18px;
+}
+
+/* Make sure lists inside the frame are readable */
+.boundary-box ul{
+	margin: 0;
+	padding-left: 1.2rem;
+}
+
