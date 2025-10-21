@@ -1,108 +1,427 @@
-/* Boundary box component converted to a sharper 8-bit / pixel-art style
-	 Usage: add the `boundary-box` class to any section or container that
-	 should appear inside the decorative pixel frame. */
+/* ============================================================
+   STYLESHEET ORGANIZATION (top to bottom)
+   1) Imports & Variables
+   2) Typography & Base rules
+   3) Components (boundary-box)
+   4) Layout: Grid systems
+   5) Utilities: Flex helpers
+   6) Integration helpers (site-specific)
+   ============================================================ */
 
-/* Load a retro pixel font (Press Start 2P) for an 8-bit look. If offline,
-	 the fallback is 'monospace' which keeps the pixel feel. */
+/* ------------------
+   1) IMPORTS & VARIABLES
+   ------------------ */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-:root{
-	--box-bg-top: #f7df83; /* lighter gold */
-	--box-bg-bottom: #e0b04a; /* darker gold */
-	--box-border: #5d3a12; /* outer border */
-	--box-accent: #f4e0a3; /* inner highlight */
-	--box-text: #2f1a0a;
-}
+:root {
+	/* Cozy 8-bit game UI stylesheet
+	   Design goals: warm pastel beige/peach/brown palette, pixel font,
+	   CSS Grid for page layout, Flexbox inside sections, soft inset shadows,
+	   rounded rectangles with 3-4px borders and subtle depth.
 
-/* Pixel-perfect frame emulation using layered box-shadows and stepped edges.
-	 The border is drawn with multiple box-shadows to imitate chunky pixels. */
-.boundary-box{
-	background: linear-gradient(180deg,var(--box-bg-top),var(--box-bg-bottom));
-	padding: 12px 18px;
-	margin: 12px 0;
-	color: var(--box-text);
-	font-family: 'Press Start 2P', monospace;
-	/* smaller, responsive pixel font sizing */
-	/* clamp(min, preferred, max) keeps the pixel font legible across viewports */
-	font-size: clamp(0.65rem, 1.6vw, 0.9rem);
-	position: relative;
-	/* Remove smooth rounded corners for sharp pixel feel */
-	border-radius: 0;
-	/* Create a chunky pixel border using multiple spread shadows (outer frame)
-		 Each shadow step simulates one pixel row/column. */
-	box-shadow:
-		/* outer dark stroke */
-		0 0 0 6px var(--box-border),
-		/* inner thin highlight */
-		0 0 0 8px var(--box-accent) inset,
-		/* chunky base shadow to give depth */
-		6px 6px 0 0 #8b5a1a;
-	/* Use crisp rendering to avoid anti-aliasing on text/background */
-	image-rendering: pixelated;
-}
+	   Structure:
+	   - Imports & variables
+	   - Base and layout (grid)
+	   - Components (sections, cards, buttons)
+	   - Helpers (flex utilities, responsive tweaks)
+	*/
 
-/* Add a stepped inner border using repeating-linear-gradient to emulate
-	 the pixel corner lines. This avoids relying on images. */
-.boundary-box::before{
-	content: '';
-	position: absolute;
-	top: -6px;
-	left: -6px;
-	right: -6px;
-	bottom: -6px;
-	background-image:
-		linear-gradient(90deg, rgba(0,0,0,0.12) 0 8px, transparent 8px),
-		linear-gradient(180deg, rgba(255,255,255,0.04) 0 6px, transparent 6px);
-	background-repeat: repeat;
-	pointer-events: none;
-}
+	/* -----------------------------
+	   Imports & variables
+	   ----------------------------- */
+	@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* Inner frame square (like the lighter inset in the reference) */
-.boundary-box::after{
-	content: '';
-	position: absolute;
-	left: 8px;
-	right: 8px;
-	top: 8px;
-	bottom: 8px;
-	border: 2px solid rgba(0,0,0,0.12);
-	pointer-events: none;
-}
+	:root {
+		/* Lighter, playful palette to match the mockup */
+		--bg-top: #f7e7db;       /* very soft peach */
+		--bg-bottom: #fff1e6;    /* airy cream */
+		--text: #4a2f1e;         /* warm brown (kept) */
+		--highlight: #f5c16c;    /* warm orange accent */
+		--peach: #fcd9c0;        /* pastel peach */
+		--panel-bg: #fff7ec;     /* panel base - lighter */
+		--panel-border: #e9cba6; /* subtle border */
+		--muted-border: #e1b68a; /* header/footer border */
+		--card-bg: #fff6e9;      /* card surface */
+		--card-border: #f0cf9f;  /* card border subtle */
+		--button-border: #d9a76a;
+		--shadow-dark: rgba(165,115,75,0.25);
+		--shadow-base: rgba(210,150,95,0.2);
+		--gap: 1rem;
+		--max-width: 1200px;
+		--radius-lg: 14px;
+		--radius-md: 10px;
+		--radius-sm: 8px;
+	}
 
-.boundary-box h1,
-.boundary-box h2,
-.boundary-box h3,
-.boundary-box p,
-.boundary-box li{
-	color: var(--box-text);
-	/* Use no text-shadow or a single-pixel highlight to keep the retro look */
-	text-shadow: 1px 1px 0 rgba(255,255,255,0.12);
-	line-height: 1.2;
-}
+	/* -----------------------------
+	   Base / Layout
+	   ----------------------------- */
+	html, body { height: 100%; }
+	body {
+		margin: 0;
+		padding: var(--gap);
+		background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+		font-family: 'Press Start 2P', monospace;
+		color: var(--text);
 
-/* Small utility: tighter summary layout inside the box */
-.summary-box.boundary-box{
-	display:flex;
-	gap: 12px;
-	align-items:center;
-	justify-content:space-between;
-	/* make children wrap on narrow viewports and distribute space evenly */
-	flex-wrap: wrap;
-}
+		/* Page grid: simple single-column layout (no sidebar in markup) */
+		display: grid;
+		grid-template-areas:
+			"header"
+			"main"
+			"footer";
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr auto;
+		gap: var(--gap);
+		min-height: 100vh;
+	}
 
-.summary-box.boundary-box .summary-item{
-	flex: 1 1 120px; /* grow, shrink, and a sensible min width */
-	min-width: 100px;
-	text-align: center;
-}
+	/* Center main container and limit width for large screens */
+	.container {
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: contents; /* allow grid to apply to body areas */
+	}
 
-.main-dashboard.boundary-box{
-	padding: 18px;
-}
+	header {
+		grid-area: header;
+		background-color: #f6dcbc; /* lighter HUD */
+		border-bottom: 3px solid var(--muted-border);
+		box-shadow: inset 0 6px rgba(255,255,255,0.6), 0 4px 0 var(--shadow-base);
+		padding: 1rem 1.25rem;
+		text-align: center;
+		border-radius: var(--radius-lg);
+	}
 
-/* Make sure lists inside the frame are readable */
-.boundary-box ul{
-	margin: 0;
-	padding-left: 1.2rem;
-}
+	aside {
+		grid-area: sidebar;
+	}
+
+	main {
+		grid-area: main;
+	}
+
+	footer {
+		grid-area: footer;
+		padding: 0.5rem;
+	}
+
+	/* Generic section / card look (rounded panel with soft inset shadow) */
+	section, article {
+		background-color: var(--panel-bg);
+		border: 3px solid var(--panel-border);
+		border-radius: var(--radius-md);
+		box-shadow: inset 0 6px rgba(255,255,255,0.6), 0 6px 0 var(--shadow-base);
+		padding: 1rem;
+	}
+
+	/* -----------------------------
+	   Header: HUD bar and nav
+	   ----------------------------- */
+	header nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.header-title {
+		font-size: 1rem; /* Press Start is tall; keep it compact */
+	}
+
+	.header-controls {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+	}
+
+	/* Summary small HUD under header */
+	.summary-box {
+		display: flex;
+		justify-content: space-around;
+		background: linear-gradient(180deg,#fff9ef,#fff4e2);
+		border: 2px solid var(--panel-border);
+		box-shadow: inset 0 4px rgba(255,255,255,0.7), 0 6px 0 rgba(200,145,90,0.08);
+		padding: 0.9rem;
+		margin: 0.75rem auto;
+		border-radius: var(--radius-lg);
+	}
+
+	.summary-item {
+		flex: 1 1 0;
+		text-align: center;
+	}
+
+	/* -----------------------------
+	   Main layout elements
+	   ----------------------------- */
+	.task-columns {
+		display: flex;
+		/* Spread the three columns evenly within a centered container */
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem 2rem;
+		max-width: 940px; /* 280 + 360 + 260 + gaps ~= 940 */
+		width: 100%;
+		box-sizing: border-box;
+		margin: 0 auto;
+	}
+
+	.task-box, .teammate-box {
+		background: var(--card-bg);
+		border: 3px solid var(--card-border);
+		box-shadow: inset 0 -6px rgba(230,200,150,0.5), 0 6px 0 var(--shadow-base);
+		border-radius: var(--radius-md);
+		padding: 1rem;
+		min-width: 0; /* allow flex children to shrink properly */
+	}
+
+	/* Normalize box-sizing inside big-panel to avoid uneven widths */
+	.big-panel .panel,
+	.big-panel .panel-inner,
+	.big-panel .task-box,
+	.big-panel .selected-task,
+	.big-panel .teammate-box {
+		box-sizing: border-box;
+		margin: 0;
+		padding-left: 0.75rem; /* consistent inner padding */
+		padding-right: 0.75rem;
+	}
+
+	/* Column sizing: left and right have fixed widths, center (selected) is wider */
+	.task-columns .task-box { flex: 0 0 280px; }
+	.task-columns .selected-task { flex: 0 0 360px; }
+	.task-columns .teammate-box { flex: 0 0 260px; }
+
+	/* Keep headings left-aligned while body stays centered */
+	.big-panel h2,
+	.big-panel h3,
+	.big-panel .panel-title {
+		align-self: flex-start;
+		width: 100%;
+		text-align: left;
+	}
+
+	/* Center the summary strip and constrain its width so it aligns with columns */
+	.big-panel .summary-box {
+		align-self: center;
+		max-width: 700px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* Center the task chips inside the left column */
+	.task-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		align-items: center;
+	}
+
+	/* Make teammate cards a consistent centered width */
+	.teammate-card {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		max-width: 680px;
+		width: 100%;
+	}
+
+	/* Task list inside a task-box */
+	.task-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.task-item {
+		background: #fffaf2;
+		border: 2px solid #f0d8b2;
+		border-radius: var(--radius-sm);
+		padding: 0.6rem;
+		box-shadow: inset 0 3px rgba(255,255,255,0.8), 0 3px 0 rgba(195,135,80,0.06);
+	}
+
+	/* Teammate card */
+	.teammate-box {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	/* -----------------------------
+	   Panels, Chips and Teammate Cards
+	   - These classes implement the boxed layout from the reference image
+	   while preserving the cozy 8-bit style.
+	   ----------------------------- */
+	.panel {
+		background: var(--panel-bg);
+		border: 4px solid var(--panel-border);
+		border-radius: 6px;
+		box-shadow: inset 0 3px #fff2d9, 0 3px 0 var(--shadow-dark);
+		padding: 0.6rem;
+	}
+
+	.panel-inner {
+		background: linear-gradient(180deg, #fff6e8, #fff0d9);
+		border: 3px solid rgba(0,0,0,0.04);
+		border-radius: 6px;
+		padding: 0.6rem;
+	}
+
+	/* Big outer panel that groups task area and teammates (matches mockup box) */
+	.big-panel {
+		border: 4px solid #e0c19a;
+		background: linear-gradient(180deg,#fff8ee,#fff3e6);
+		padding: 1rem 1.25rem;
+		border-radius: var(--radius-lg);
+		box-shadow: inset 0 6px rgba(255,255,255,0.6), 0 8px 0 rgba(200,150,100,0.06);
+		margin: 0 auto 1rem auto;
+		max-width: 980px; /* widen to fit columns + gaps */
+		display: flex;
+		flex-direction: column;
+		align-items: center; /* center inner content */
+	}
+
+	/* HUD style for the summary area with inner rounded box */
+	.hud-panel {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+		justify-content: space-around;
+		background: #f9e7c6;
+		border: 3px solid #c9a36f;
+		padding: 0.5rem;
+		border-radius: 8px;
+	}
+
+	/* Task chips (left column) */
+	.task-chip {
+		background: #fff2d9;
+		border: 3px solid #d6b88d;
+		padding: 0.5rem 0.8rem;
+		border-radius: 6px;
+		box-shadow: inset 0 2px #fff8e9, 0 3px 0 #caa474;
+		color: var(--text);
+		font-size: 0.75rem;
+		text-align: left;
+		width: 100%;
+	}
+
+	.task-chip.small { font-size: 0.65rem; padding: 0.35rem 0.6rem; }
+
+	.selected-task .task-title {
+		font-size: 0.85rem;
+		margin: 0 0 0.4rem 0;
+	}
+
+	.view-btn {
+		background: #f5b580;
+		border: 3px solid #9c6539;
+		padding: 0.45rem 0.9rem;
+		border-radius: 6px;
+	}
+
+	/* Teammate card layout */
+	.teammate-card {
+		display:flex;
+		align-items:center;
+		gap: 0.75rem;
+		padding: 0.5rem;
+	}
+	.teammate-avatar {
+		width:48px; height:48px; border-radius:6px;
+		background: linear-gradient(180deg,#f0d8b0,#e9c892);
+		display:flex; align-items:center; justify-content:center;
+		border:3px solid #d4b07a; box-shadow: inset 0 2px #fff8e9, 0 3px 0 #caa474;
+	}
+	.teammate-body { flex:1; display:flex; flex-direction:column; gap:0.4rem; }
+	.task-chips { display:flex; gap:0.4rem; flex-wrap:wrap; }
+	.chat-btn { background: var(--highlight); border:3px solid var(--button-border); padding:0.5rem; border-radius:6px; }
+
+	/* -----------------------------
+	   Buttons & Links
+	   ----------------------------- */
+	button, a {
+		background: var(--highlight);
+		border: 3px solid var(--button-border);
+		box-shadow: inset 0 -3px rgba(220,165,90,0.4), 0 6px 0 rgba(180,115,65,0.12);
+		border-radius: 999px; /* pill-like */
+		padding: 0.6rem 1.1rem;
+		color: var(--text);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+		cursor: pointer;
+	}
+
+	button:hover, a:hover {
+		background: #fce3ab;
+		transform: translateY(1px);
+		box-shadow: inset 0 -2px rgba(230,170,90,0.45), 0 3px 0 rgba(160,100,50,0.08);
+	}
+
+	/* small icon buttons that live in header / controls */
+	.icon-btn {
+		background: var(--peach);
+		border: 3px solid var(--button-border);
+		padding: 0.35rem 0.5rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* -----------------------------
+	   Footer: HUD bar
+	   ----------------------------- */
+	footer nav {
+		display: flex;
+		justify-content: space-evenly;
+		align-items: center;
+		padding: 1rem;
+		background-color: var(--peach);
+		border-top: 3px solid var(--muted-border);
+		box-shadow: inset 0 6px rgba(255,255,255,0.6), 0 -6px 0 var(--shadow-base);
+		border-radius: var(--radius-lg);
+	}
+
+	/* -----------------------------
+	   Helpers: spacing, responsive tweaks
+	   ----------------------------- */
+	.container-inner {
+		width: 100%;
+		max-width: var(--max-width);
+		margin: 0 auto;
+	}
+
+	/* Responsive: collapse sidebar on small screens */
+	@media (max-width: 900px) {
+		body {
+			grid-template-areas:
+				"header"
+				"main"
+				"sidebar"
+				"footer";
+			grid-template-columns: 1fr;
+			grid-template-rows: auto 1fr auto auto;
+		}
+
+		.task-columns { flex-direction: column; }
+
+		.summary-box { flex-direction: column; gap: 0.5rem; }
+	}
+
+	/* small tweaks for very narrow screens */
+	@media (max-width: 420px) {
+		button, a { font-size: 0.7rem; padding: 0.4rem 0.8rem; }
+		.header-title { font-size: 0.85rem; }
+	}
+
+	/* subtle transitions for interactive elements */
+	* { transition: background 0.08s ease, box-shadow 0.08s ease; }
+
+	/* keep visuals soft and avoid harsh contrast */
+	img { image-rendering: pixelated; max-width: 100%; height: auto; }
+
 

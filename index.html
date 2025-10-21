@@ -14,18 +14,6 @@
     </div>
   </nav>
 
-  <!-- ===== Weekly Overview ===== -->
-  <section aria-label="Weekly Summary" class="summary-box boundary-box">
-    <div class="summary-item">
-      <p><strong>3</strong> Finished</p>
-    </div>
-    <div class="summary-item">
-      <p><strong>5</strong> Unfinished</p>
-    </div>
-    <div class="summary-item">
-      <p><strong>023</strong> EXP Earned</p>
-    </div>
-  </section>
 </header>
 
 <!-- ================= MAIN ================= -->
@@ -34,75 +22,116 @@
   <!-- ===== MIDDLE WRAPPER (Main Dashboard) ===== -->
   <section aria-label="Main Dashboard" class="main-dashboard boundary-box">
 
+    <div class="big-panel">
     <!-- ===== TASK SECTION ===== -->
     <section aria-label="Task Management">
+      <!-- Weekly Summary placed above tasks -->
+      <div class="summary-box boundary-box hud-panel" style="margin-bottom:1rem;">
+        <div class="hud-item panel">
+          <div class="panel-inner">
+            <p><strong>3</strong><br/>Finished</p>
+          </div>
+        </div>
+        <div class="hud-item panel">
+          <div class="panel-inner">
+            <p><strong>5</strong><br/>Unfinished</p>
+          </div>
+        </div>
+        <div class="hud-item panel">
+          <div class="panel-inner">
+            <p><strong>023</strong><br/>EXP Earned</p>
+          </div>
+        </div>
+      </div>
       <h2>Your Chore Tasks</h2>
 
       <!-- --- Two Columns: Unassigned + Selected Tasks --- -->
       <div class="task-columns">
         
-        <!-- Left Column: Unassigned Tasks -->
-        <article aria-label="Unassigned Tasks">
-          <h3>Unassigned Tasks</h3>
-          <ul>
-            <li>Task 1 — Category A — EXP 10</li>
-            <li>Task 2 — Category B — EXP 20</li>
-            <li>Task 3 — Category C — EXP 15</li>
-          </ul>
+        <!-- Left Column: Unassigned Tasks (chips) -->
+        <article aria-label="Unassigned Tasks" class="task-box panel">
+          <h3>Unassigned task</h3>
+          <div class="task-list">
+            <div class="task-chip">TASK1</div>
+            <div class="task-chip">TASK2</div>
+            <div class="task-chip">TASK3</div>
+          </div>
         </article>
 
         <!-- Right Column: Your Selected Task -->
-        <article aria-label="Your Selected Task">
-          <h3>Your Selected Task</h3>
-          <ul>
-            <li>Task 4 — Category A — EXP 10</li>
-            <li>Task 5 — Category C — EXP 25</li>
-          </ul>
+        <article aria-label="Your Selected Task" class="task-box panel selected-task">
+          <h3>Your selected task</h3>
+          <div class="panel-inner">
+            <p class="task-title">TASK 1</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>Time left: <strong>12h30m</strong></p>
+            <button class="view-btn">View Task</button>
+          </div>
         </article>
 
       </div> <!-- end task-columns -->
-    </section>
+  </section>
 
-    <!-- ===== HORIZONTAL DIVIDER ===== -->
-    <hr />
+  <!-- ===== HORIZONTAL DIVIDER ===== -->
+  <hr />
 
-    <!-- ===== TEAMMATE SECTION ===== -->
-    <section aria-label="Your Space Teammates">
+  <!-- ===== TEAMMATE SECTION ===== -->
+  <section aria-label="Your Space Teammates">
       <h2>Your Space Teammates</h2>
 
       <!-- --- Teammate #1 --- -->
-      <article aria-label="Teammate #1">
-        <h3>Teammate #1</h3>
-        <ul>
-          <li>Task 6 — Category B — EXP 10</li>
-          <li>Task 7 — Category A — EXP 20</li>
-        </ul>
-        <button>Chat</button>
+      <article aria-label="Teammate #1" class="teammate-box panel">
+        <div class="teammate-card">
+          <div class="teammate-avatar">👤</div>
+          <div class="teammate-body">
+            <div><strong>Teammate #1</strong></div>
+            <div class="task-chips">
+              <div class="task-chip small">TASK</div>
+              <div class="task-chip small">TASK</div>
+              <div class="task-chip small">TASK</div>
+            </div>
+          </div>
+          <button class="chat-btn">CHAT</button>
+        </div>
       </article>
 
       <!-- --- Teammate #2 --- -->
-      <article aria-label="Teammate #2">
-        <h3>Teammate #2</h3>
-        <ul>
-          <li>Task 8 — Category C — EXP 15</li>
-          <li>Task 9 — Category B — EXP 25</li>
-        </ul>
-        <button>Chat</button>
+      <article aria-label="Teammate #2" class="teammate-box panel">
+        <div class="teammate-card">
+          <div class="teammate-avatar">👤</div>
+          <div class="teammate-body">
+            <div><strong>Teammate #2</strong></div>
+            <div class="task-chips">
+              <div class="task-chip small">TASK</div>
+              <div class="task-chip small">TASK</div>
+              <div class="task-chip small">TASK</div>
+            </div>
+          </div>
+          <button class="chat-btn">CHAT</button>
+        </div>
       </article>
 
       <!-- --- Teammate #3 --- -->
-      <article aria-label="Teammate #3">
-        <h3>Teammate #3</h3>
-        <ul>
-          <li>Task 10 — Category A — EXP 10</li>
-          <li>Task 11 — Category D — EXP 30</li>
-        </ul>
-        <button>Chat</button>
+      <article aria-label="Teammate #3" class="teammate-box panel">
+        <div class="teammate-card">
+          <div class="teammate-avatar">👤</div>
+          <div class="teammate-body">
+            <div><strong>Teammate #3</strong></div>
+            <div class="task-chips">
+              <div class="task-chip small">TASK</div>
+              <div class="task-chip small">TASK</div>
+              <div class="task-chip small">TASK</div>
+            </div>
+          </div>
+          <button class="chat-btn">CHAT</button>
+        </div>
       </article>
 
       <!-- --- Leaderboard Link --- -->
       <p><a href="#">Go to Leaderboard &gt;&gt;</a></p>
     </section>
+
+    </div> <!-- end big-panel -->
 
   </section> <!-- end Main Dashboard wrapper -->
 
