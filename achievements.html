@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cozy Chore — Home</title>
+    <title>Achievements — Cozy Chore</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -26,17 +26,15 @@
     <main>
       <section class="main-dashboard boundary-box">
         <div class="big-panel">
-          <h2>Welcome to Cozy Chore</h2>
-          <p style="max-width:700px; text-align:center;">A playful way to track chores, invite friends, and earn cozy badges. Use the buttons below to explore the app.</p>
+          <h2>Your Badges & XP</h2>
+          <p style="max-width:720px; text-align:center;">Track milestones, XP earned, and unlocked badges here.</p>
 
-          <div style="display:flex; gap:0.8rem; margin-top:1rem; flex-wrap:wrap; justify-content:center;">
-            <a href="setup.html" class="btn">Set Up Your Home</a>
-            <a href="chores.html" class="btn">Your Assigned Chores</a>
-            <a href="achievements.html" class="btn">Achievements</a>
-            <a href="about.html" class="btn">About</a>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-top:1rem;">
+            <div class="panel"><div class="panel-inner">Badge: Tidy Beginner<br/><small>Earned: 3xp</small></div></div>
+            <div class="panel"><div class="panel-inner">Badge: Early Riser<br/><small>Earned: 10xp</small></div></div>
+            <div class="panel"><div class="panel-inner">XP: 023</div></div>
           </div>
 
-          <p style="margin-top:1.25rem; font-size:0.9rem; text-align:center; color:var(--text);">Tip: Visit the chores page to see your tasks and invite friends.</p>
         </div>
       </section>
     </main>

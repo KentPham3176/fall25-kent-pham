@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Cozy Chore — Home</title>
+    <title>Friend's Chores — Cozy Chore</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -22,21 +22,29 @@
         <div class="profile-box"><button aria-label="User Profile">👤</button></div>
       </nav>
     </header>
+    <div style="max-width:980px;margin:0.75rem auto 0; text-align:left;">
+      <a href="chores.html" class="btn">← Back to My Chores</a>
+    </div>
 
     <main>
       <section class="main-dashboard boundary-box">
         <div class="big-panel">
-          <h2>Welcome to Cozy Chore</h2>
-          <p style="max-width:700px; text-align:center;">A playful way to track chores, invite friends, and earn cozy badges. Use the buttons below to explore the app.</p>
+          <h2>Visiting: Teammate's Chores</h2>
+          <p style="max-width:720px; text-align:center;">This page shows chores for a friend or teammate. It’s intentionally not in the main nav — access it from a chore or teammate card.</p>
 
-          <div style="display:flex; gap:0.8rem; margin-top:1rem; flex-wrap:wrap; justify-content:center;">
-            <a href="setup.html" class="btn">Set Up Your Home</a>
-            <a href="chores.html" class="btn">Your Assigned Chores</a>
-            <a href="achievements.html" class="btn">Achievements</a>
-            <a href="about.html" class="btn">About</a>
+          <div style="margin-top:1rem; display:flex; gap:0.6rem; justify-content:center;">
+            <a href="chores.html" class="btn">Back to Your Chores</a>
           </div>
 
-          <p style="margin-top:1.25rem; font-size:0.9rem; text-align:center; color:var(--text);">Tip: Visit the chores page to see your tasks and invite friends.</p>
+          <section style="margin-top:1rem;">
+            <article class="task-box panel">
+              <h3>Friend's Unassigned</h3>
+              <div class="task-list">
+                <div class="task-chip">FRIEND TASK 1</div>
+                <div class="task-chip">FRIEND TASK 2</div>
+              </div>
+            </article>
+          </section>
         </div>
       </section>
     </main>

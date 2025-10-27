@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your Assigned Chores — Cozy Chore</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header>
+      <nav class="header-bar" aria-label="Main Navigation">
+        <a class="site-brand" href="index.html" aria-label="Cozy Chore Home">
+          <div class="site-logo">☕</div>
+          <span class="brand-text">Cozy Chore</span>
+        </a>
+        <nav class="main-nav" aria-label="Primary Navigation">
+          <a href="setup.html">🛋️ Setup</a>
+          <a href="chores.html" class="active">🗒️ Your Chores</a>
+          <a href="achievements.html">🏆 Achievements</a>
+          <a href="about.html">💡 About</a>
+        </nav>
+        <div class="profile-box"><button aria-label="User Profile">👤</button></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ===== MIDDLE WRAPPER (Main Dashboard) ===== -->
+      <section aria-label="Main Dashboard" class="main-dashboard boundary-box">
+
+        <div class="big-panel">
+        <!-- ===== TASK SECTION ===== -->
+        <section aria-label="Task Management">
+          <!-- Weekly Summary placed above tasks -->
+          <div class="summary-box boundary-box hud-panel" style="margin-bottom:1rem;">
+            <div class="hud-item panel">
+              <div class="panel-inner">
+                <p><strong>3</strong><br/>Finished</p>
+              </div>
+            </div>
+            <div class="hud-item panel">
+              <div class="panel-inner">
+                <p><strong>5</strong><br/>Unfinished</p>
+              </div>
+            </div>
+            <div class="hud-item panel">
+              <div class="panel-inner">
+                <p><strong>023</strong><br/>EXP Earned</p>
+              </div>
+            </div>
+          </div>
+          <h2>Your Chore Tasks</h2>
+
+          <!-- --- Two Columns: Unassigned + Selected Tasks --- -->
+          <div class="task-columns">
+            
+            <!-- Left Column: Unassigned Tasks (chips) -->
+            <article aria-label="Unassigned Tasks" class="task-box panel">
+              <h3>Unassigned task</h3>
+              <div class="task-list">
+                <div class="task-chip">TASK1</div>
+                <div class="task-chip">TASK2</div>
+                <div class="task-chip">TASK3</div>
+              </div>
+            </article>
+
+            <!-- Right Column: Your Selected Task -->
+            <article aria-label="Your Selected Task" class="task-box panel selected-task">
+              <h3>Your selected task</h3>
+              <div class="panel-inner">
+                <p class="task-title">TASK 1</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p>Time left: <strong>12h30m</strong></p>
+                <button class="view-btn">View Task</button>
+              </div>
+            </article>
+
+          </div> <!-- end task-columns -->
+      </section>
+
+      <!-- ===== HORIZONTAL DIVIDER ===== -->
+      <hr />
+
+      <!-- ===== TEAMMATE SECTION ===== -->
+      <section aria-label="Your Space Teammates">
+          <h2>Your Space Teammates</h2>
+
+          <!-- --- Teammate #1 --- -->
+          <article aria-label="Teammate #1" class="teammate-box panel">
+            <div class="teammate-card">
+              <div class="teammate-avatar">👤</div>
+              <div class="teammate-body">
+                <div><strong>Teammate #1</strong></div>
+                <div class="task-chips">
+                  <div class="task-chip small">TASK</div>
+                  <div class="task-chip small">TASK</div>
+                  <div class="task-chip small">TASK</div>
+                </div>
+              </div>
+              <div class="teammate-actions" style="display:flex; flex-direction:column; gap:0.5rem;">
+                <button class="chat-btn">CHAT</button>
+                <a href="friends.html#friend1" class="btn">Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- --- Teammate #2 --- -->
+          <article aria-label="Teammate #2" class="teammate-box panel">
+            <div class="teammate-card">
+              <div class="teammate-avatar">👤</div>
+              <div class="teammate-body">
+                <div><strong>Teammate #2</strong></div>
+                <div class="task-chips">
+                  <div class="task-chip small">TASK</div>
+                  <div class="task-chip small">TASK</div>
+                  <div class="task-chip small">TASK</div>
+                </div>
+              </div>
+              <div class="teammate-actions" style="display:flex; flex-direction:column; gap:0.5rem;">
+                <button class="chat-btn">CHAT</button>
+                <a href="friends.html#friend2" class="btn">Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- --- Teammate #3 --- -->
+          <article aria-label="Teammate #3" class="teammate-box panel">
+            <div class="teammate-card">
+              <div class="teammate-avatar">👤</div>
+              <div class="teammate-body">
+                <div><strong>Teammate #3</strong></div>
+                <div class="task-chips">
+                  <div class="task-chip small">TASK</div>
+                  <div class="task-chip small">TASK</div>
+                  <div class="task-chip small">TASK</div>
+                </div>
+              </div>
+              <div class="teammate-actions" style="display:flex; flex-direction:column; gap:0.5rem;">
+                <button class="chat-btn">CHAT</button>
+                <a href="friends.html#friend3" class="btn">Visit</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- --- Leaderboard Link --- -->
+          <p><a href="#">Go to Leaderboard &gt;&gt;</a></p>
+        </section>
+
+        </div> <!-- end big-panel -->
+
+      </section> <!-- end Main Dashboard wrapper -->
+
+    </main>
+
+    <footer>
+      <nav aria-label="Footer Navigation">
+        <div class="tagline">Made with ☕ and ✨ by Cozy Crew</div>
+        <div class="copyright">© Cozy Chore</div>
+      </nav>
+    </footer>
+    <script src="main.js"></script>
+  </body>
+</html>
