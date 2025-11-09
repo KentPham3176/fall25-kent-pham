@@ -1,3 +1,42 @@
+/* Cozy pixel-art style for dynamically rendered chore cards */
+.chore-card {
+	background: var(--card-bg);
+	border: 4px solid var(--card-border);
+	border-radius: var(--radius-md);
+	box-shadow: inset 0 4px #fff8e9, 0 6px 0 var(--shadow-base);
+	font-family: 'Press Start 2P', monospace;
+	color: var(--text);
+	margin-bottom: 1.2rem;
+	padding: 0.7rem 1.1rem;
+	transition: box-shadow 0.12s, background 0.12s;
+}
+.chore-card h3 {
+	font-size: 1rem;
+	margin: 0 0 0.5rem 0;
+	color: var(--text);
+	text-align: left;
+}
+.chore-card p {
+	font-size: 0.85rem;
+	margin: 0.2rem 0 0.2rem 0;
+	text-align: left;
+}
+.chore-card .status {
+	font-weight: bold;
+	padding: 0.15em 0.5em;
+	border-radius: 6px;
+	font-size: 0.85rem;
+}
+.chore-card .status.finished {
+	color: #388e3c;
+	background: #e6f9e6;
+	border: 2px solid #a5d6a7;
+}
+.chore-card .status.unfinished {
+	color: #c62828;
+	background: #ffeaea;
+	border: 2px solid #ef9a9a;
+}
 /* ============================================================
    STYLESHEET ORGANIZATION (top to bottom)
    1) Imports & Variables
